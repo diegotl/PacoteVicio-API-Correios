@@ -50,7 +50,7 @@ Escolha e ajuste o timeout de seu cliente conforme a necessidade da sua aplicaç
 
 ### 4. Resposta
 
-A resposta será um JSON contendo o status da encomenda:
+A resposta será um JSON contendo o status da encomenda.
 
 #### Exemplo (simplificado):
 
@@ -121,8 +121,5 @@ A resposta será um JSON contendo o status da encomenda:
   "percorridaCarteiro": false,
   "bloqueioObjeto": false,
   "arEletronico": false,
-  "locker": false,
-  "atrasado": false,
-  "urlFaleComOsCorreios": "",
-  "temEventoEntrega": false
+  "atrasado": false
 }
