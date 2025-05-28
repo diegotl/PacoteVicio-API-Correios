@@ -1,6 +1,6 @@
-# 📦 API PacoteVício - Rastreamento de Encomendas dos Correios
+# 📦 API PacoteVício - Rastreamento de Encomendas Correios e AliExpress
 
-Documentação da API PacoteVício para rastreamento de objetos dos Correios do Brasil.
+Documentação da API PacoteVício para rastreamento de objetos dos Correios do Brasil e pacotes do AliExpress.
 Veja mais informações na [página oficial da API PacoteVício](http://pacotevicio.dev).
 
 ## 🔗 Acesso à API
@@ -20,25 +20,28 @@ Para utilizar esta API, é necessário obter uma chave de API através do RapidA
 3. Crie uma conta caso seja necessário
 4. Sua chave de API (X-RapidAPI-Key) estará disponível na [área de testes](https://rapidapi.com/pacotevicio-pacotevicio-default/api/correios-rastreamento-de-encomendas/playground/apiendpoint_19d15e2c-d3a9-422f-9da1-05881c97f70d)
 
-### 2. Fazer uma Requisição
 
-Utilize o endpoint da API para consultar o status de uma encomenda.
+## 💻 Endpoints Disponíveis
+
+### 2.1. Correios - `/correios`
+
+Utilize este endpoint para consultar o status de encomendas dos Correios do Brasil.
 
 #### Exemplo de Requisição com cURL:
 
 ```bash
-curl -X GET "https://correios-rastreamento-de-encomendas.p.rapidapi.com/correios?tracking_code=AM101610575BR" \
+curl -X GET "https://api.pacotevicio.dev/correios?tracking_code=AM101610575BR" \
   --header "X-RapidAPI-Key: SUA_CHAVE_DE_API"
 ```
 
-### 3. Parâmetros
+#### Parâmetros - Correios
 
 | Parâmetro         | Tipo   | Obrigatório | Descrição                                                                                     |
 |-------------------|--------|-------------|-----------------------------------------------------------------------------------------------|
 | `tracking_code`   | string | Sim         | Código de rastreamento do objeto. Deve conter 13 caracteres: 2 letras iniciais, 9 números e 2 letras finais. |
 | `confidence_level`| string | Não         | Nível de confiança para tentativas de rastreamento em caso de falha. Valores possíveis: `low`, `medium`, `high`. Padrão: `high`. |
 
-#### Sobre `confidence_level`
+##### Sobre `confidence_level`
 
 Este parâmetro define o nível de esforço da API para tentar obter uma resposta dos Correios em situações de instabilidade do mesmo.
 
@@ -48,9 +51,30 @@ Este parâmetro define o nível de esforço da API para tentar obter uma respost
 
 Escolha e ajuste o timeout de seu cliente conforme a necessidade da sua aplicação. Se o parâmetro for omitido, o valor padrão será `high`.
 
-### 4. Resposta
+### 2.2. AliExpress - `/aliexpress`
 
-A resposta será um JSON contendo o status da encomenda.
+Utilize este endpoint para consultar o status de pacotes do AliExpress.
+
+#### Exemplo de Requisição com cURL:
+
+```bash
+curl -X GET "https://api.pacotevicio.dev/aliexpress?tracking_code=LP00123456789CN" \
+  --header "X-RapidAPI-Key: SUA_CHAVE_DE_API"
+```
+
+#### Parâmetros - AliExpress
+
+| Parâmetro         | Tipo   | Obrigatório | Descrição                                                                                   |
+|-------------------|--------|-------------|---------------------------------------------------------------------------------------------|
+| `tracking_code`   | string | Sim         | Código de rastreamento do pacote AliExpress. Aceita diversos formatos de código de rastreamento internacional. |
+| `confidence_level`| string | Não         | Nível de confiança para tentativas de rastreamento em caso de falha. Valores possíveis: `low`, `medium`, `high`. Padrão: `high`. |
+| `language`        | string | Não         | Idioma da resposta. Valores possíveis: `pt-BR` (Português), `en-US` (Inglês), `fr-FR` (Francês), `zh-CN` (Chinês). Padrão: `en-US`. |
+
+## 📋 Resposta
+
+### 3.1. Resposta - Correios
+
+A resposta será um JSON contendo o status da encomenda dos Correios.
 
 #### Exemplo (simplificado):
 
@@ -123,3 +147,56 @@ A resposta será um JSON contendo o status da encomenda.
   "arEletronico": false,
   "atrasado": false
 }
+```
+
+### 3.2. Resposta - AliExpress
+
+A resposta será um JSON contendo o status do pacote AliExpress.
+
+#### Exemplo (simplificado):
+
+```json
+{
+    "mailNo": "LP00123456789CN",
+    "originCountry": "Mainland China",
+    "destCountry": "Brazil",
+    "status": "CLEAR_CUSTOMS",
+    "statusDesc": "In customs ",
+    "mailNoSource": "AE",
+    "globalEtaInfo": {
+        "etaDesc": "Estimated delivery by",
+        "deliveryMinTime": 1749006268984,
+        "deliveryMaxTime": 1750475068984
+    },
+    "detailList": [
+        {
+            "time": 1748410407000,
+            "timeStr": "2025-05-28 13:33:27",
+            "desc": "",
+            "standerdDesc": "Import customs clearance complete",
+            "descTitle": "Carrier note:",
+            "timeZone": "GMT-3",
+            "actionCode": "CC_IM_SUCCESS"
+        },
+        {
+            "time": 1747839077000,
+            "timeStr": "2025-05-21 22:51:17",
+            "desc": "",
+            "standerdDesc": "[Shatian Town] Processing at sorting center",
+            "descTitle": "Carrier note:",
+            "timeZone": "GMT+8",
+            "actionCode": "SC_INBOUND_SUCCESS"
+        },
+        {
+            "time": 1747805584000,
+            "timeStr": "2025-05-21 13:33:04",
+            "desc": "",
+            "standerdDesc": "Received by logistics company",
+            "descTitle": "Carrier note:",
+            "timeZone": "GMT+8",
+            "actionCode": "PU_PICKUP_SUCCESS"
+        }
+    ],
+    "daysNumber": "8\tday(s)"
+}
+```
