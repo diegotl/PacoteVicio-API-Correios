@@ -1,7 +1,7 @@
 # 📦 API PacoteVício - Rastreamento de Encomendas dos Correios
 
 Documentação da API PacoteVício para rastreamento de objetos dos Correios do Brasil.
-Veja mais informações na [página oficial da API PacoteVício](http://developers.pacotevicio.app).
+Veja mais informações na [página oficial da API PacoteVício](http://pacotevicio.dev).
 
 ## 🔗 Acesso à API
 
