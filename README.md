@@ -62,7 +62,7 @@ curl -X GET "https://api.pacotevicio.dev/correios?tracking_code=AM101610575BR" \
   --header "X-RapidAPI-Key: SUA_CHAVE_DE_API"
 ```
 
-Troque `/correios` por `/aliexpress`, `/shopee` ou `/anjun` conforme o serviço desejado.
+Troque `/correios` por `/aliexpress`, `/shopee`, `/anjun` ou `/loggi` conforme o serviço desejado.
 
 ---
 
