@@ -1,6 +1,6 @@
 # 📦 API PacoteVício - Rastreamento de Encomendas Correios, AliExpress, Shopee Xpress e Anjun Express
 
-Documentação da API PacoteVício para rastreamento de objetos dos Correios do Brasil, pacotes do AliExpress, Shopee Xpress, Anjun Express e Loggi.
+Documentação da API PacoteVício para rastreamento de objetos dos Correios do Brasil, pacotes do AliExpress, Shopee Xpress e Anjun Express.
 Veja mais informações na [página oficial da API PacoteVício](http://pacotevicio.dev).
 
 ## 🔗 Acesso à API
@@ -31,7 +31,6 @@ A API suporta múltiplos serviços de rastreamento, todos com a mesma estrutura 
 | AliExpress      | `/aliexpress`     | Rastreamento de pacotes AliExpress          |
 | Shopee Xpress   | `/shopee`         | Rastreamento de pacotes Shopee Xpress       |
 | Anjun Express   | `/anjun`          | Rastreamento de pacotes Anjun Express       |
-| Loggi           | `/loggi`          | Rastreamento de pacotes Loggi               |
 
 ### Parâmetros Comuns
 
@@ -62,7 +61,7 @@ curl -X GET "https://api.pacotevicio.dev/correios?tracking_code=AM101610575BR" \
   --header "X-RapidAPI-Key: SUA_CHAVE_DE_API"
 ```
 
-Troque `/correios` por `/aliexpress`, `/shopee`, `/anjun` ou `/loggi` conforme o serviço desejado.
+Troque `/correios` por `/aliexpress`, `/shopee` ou `/anjun` conforme o serviço desejado.
 
 ---
 
@@ -457,164 +456,6 @@ Troque `/correios` por `/aliexpress`, `/shopee`, `/anjun` ou `/loggi` conforme o
     ],
     "providerNumber": null,
     "trackNo": "AJ250101341570001"
-}
-```
-</details>
-
-<details>
-<summary><strong>Exemplo de resposta - Loggi</strong></summary>
-
-```json
-{
-    "packages": [
-        {
-            "loggiKey": "M5UDCZLG3JCXIN5HUTNVTWQVD5",
-            "trackingCode": "ME251TCU021BR",
-            "companyId": 1712416,
-            "promisedDate": "2025-05-29T02:00:00Z",
-            "slo": 4,
-            "serviceType": "Unknown",
-            "labelled": true,
-            "packaged": true,
-            "status": {
-                "statusCode": 2,
-                "label": "Entregue"
-            },
-            "recipient": {
-                "name": "João",
-                "document": "999.***.***-99",
-                "phone": "99*****99",
-                "address": {
-                    "street": "Avenida ****",
-                    "number": "999",
-                    "complement": "1B",
-                    "neighborhood": "In**********",
-                    "city": "São Pa***",
-                    "state": "SP",
-                    "postalCode": "*****-999"
-                }
-            },
-            "sender": {
-                "name": "ABC",
-                "address": {
-                    "postalCode": "*****-999"
-                }
-            },
-            "deviation": {},
-            "pickup": {
-                "pickupType": "PICKUP_TYPE_DEDICATED"
-            },
-            "history": {
-                "history": [
-                    {
-                        "statusCode": 2,
-                        "label": "Entregue",
-                        "updateTime": "2025-05-26T15:50:31Z"
-                    },
-                    {
-                        "statusCode": 3,
-                        "label": "Retirado",
-                        "location": "Base São Paulo - Mooca, São Paulo - SP",
-                        "updateTime": "2025-05-26T08:24:42.296641Z"
-                    },
-                    {
-                        "statusCode": 89,
-                        "label": "Transferência finalizada",
-                        "location": "Base São Paulo - Mooca, São Paulo - SP",
-                        "updateTime": "2025-05-26T08:24:02.702001Z"
-                    },
-                    {
-                        "statusCode": 88,
-                        "label": "Transferência iniciada",
-                        "location": "Base Cajamar 2, Cajamar - SP",
-                        "updateTime": "2025-05-24T03:22:40.415135Z"
-                    },
-                    {
-                        "statusCode": 83,
-                        "label": "Volumetrizado",
-                        "updateTime": "2025-05-24T02:05:03.218700Z"
-                    },
-                    {
-                        "statusCode": 89,
-                        "label": "Transferência finalizada",
-                        "location": "Base Cajamar 2, Cajamar - SP",
-                        "updateTime": "2025-05-24T01:12:05.900500Z"
-                    },
-                    {
-                        "statusCode": 88,
-                        "label": "Transferência iniciada",
-                        "location": "Base XD - Brasília, Brasília - DF",
-                        "updateTime": "2025-05-23T06:23:49.198770Z"
-                    },
-                    {
-                        "statusCode": 89,
-                        "label": "Transferência finalizada",
-                        "updateTime": "2025-05-23T05:08:13.608395Z"
-                    },
-                    {
-                        "statusCode": 88,
-                        "label": "Transferência iniciada",
-                        "location": "Base Goiania - Aparecida de Goiania, Aparecida de Goiânia - GO",
-                        "updateTime": "2025-05-22T07:23:05.786885Z"
-                    },
-                    {
-                        "statusCode": 84,
-                        "label": "Conferido",
-                        "updateTime": "2025-05-22T07:17:31.444388Z"
-                    },
-                    {
-                        "statusCode": 91,
-                        "label": "Arquivo integrado",
-                        "location": "Base Goiania - Aparecida de Goiania, Aparecida de Goiânia - GO",
-                        "updateTime": "2025-05-21T20:47:43.681629Z"
-                    }
-                ]
-            },
-            "deliveryDirection": {
-                "code": 1,
-                "text": "Em direção de entrega"
-            },
-            "associatedService": {
-                "name": "Loggi Nacional",
-                "description": "Envio com Coleta fixa dedicada e Entrega na Porta do destinatário.",
-                "externalServiceId": "DLVR-DEDI-DOOR-STAN-01",
-                "serviceSpecificationCategory": "PARCEL_DELIVERY",
-                "mileComponentsFirstMile": "PICKUP_TYPE_DEDICATED",
-                "mileComponentsMiddleMile": "PROCESSING_TYPE_STANDARD",
-                "mileComponentsLastMile": "DELIVERY_TYPE_CUSTOMER_DOOR"
-            }
-        }
-    ],
-    "proofOfDeliveryDetails": {
-        "loggiKey": "M5UDCZLG3JCXIN5HUTNVTWQVD6",
-        "trackingCode": "ME251TCU021BR",
-        "deliveryDate": "2025-05-26T15:50:31Z",
-        "deliveryLocation": {
-            "street": "Avenida J****",
-            "number": "999",
-            "complement": "1B",
-            "neighborhood": "Ba**********",
-            "city": "São Pa***",
-            "state": "SP",
-            "postalCode": "*****-011"
-        },
-        "deliveryInfo": "Na portaria",
-        "receivedBy": {
-            "name": "João",
-            "document": "99.***.***-9x"
-        },
-        "receiptUrl": "https://dnni6puux43rok3alyymdo3dw40hifgi.lambda-url.us-east-1.on.aws/?secret-id=380ac47d2e&tracking-key=ME251TCU021BR",
-        "deliveryDriver": {
-            "info": "Entregador individual"
-        },
-        "recipient": {
-            "name": "José"
-        },
-        "sender": {
-            "name": "ABC"
-        },
-        "sourceApp": "Loggi para entregar"
-    }
 }
 ```
 </details>
