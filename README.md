@@ -1,4 +1,4 @@
-# 📦 API PacoteVício - Rastreamento de Encomendas Correios, AliExpress, Shopee Xpress, Anjun Express e Loggi
+# 📦 API PacoteVício - Rastreamento de Encomendas Correios, AliExpress, Shopee Xpress e Anjun Express
 
 Documentação da API PacoteVício para rastreamento de objetos dos Correios do Brasil, pacotes do AliExpress, Shopee Xpress, Anjun Express e Loggi.
 Veja mais informações na [página oficial da API PacoteVício](http://pacotevicio.dev).
