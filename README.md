@@ -1,6 +1,6 @@
-# 📦 API PacoteVício - Rastreamento de Encomendas Correios, AliExpress, Shopee Xpress e Anjun Express
+# 📦 API PacoteVício - Rastreamento de Encomendas Correios, AliExpress, Shopee Xpress, Anjun Express e J&T Express
 
-Documentação da API PacoteVício para rastreamento de objetos dos Correios do Brasil, pacotes do AliExpress, Shopee Xpress e Anjun Express.
+Documentação da API PacoteVício para rastreamento de objetos dos Correios do Brasil, pacotes do AliExpress, Shopee Xpress, Anjun Express e J&T Express.
 Veja mais informações na [página oficial da API PacoteVício](http://pacotevicio.dev).
 
 ## 🔗 Acesso à API
@@ -25,22 +25,24 @@ Para utilizar esta API, é necessário obter uma chave de API através do RapidA
 
 A API suporta múltiplos serviços de rastreamento, todos com a mesma estrutura de requisição. Basta alterar o endpoint conforme o serviço desejado:
 
-| Serviço         | Endpoint           | Observações                                 |
-|-----------------|-------------------|---------------------------------------------|
-| Correios        | `/correios`       | Rastreamento dos Correios do Brasil         |
-| AliExpress      | `/aliexpress`     | Rastreamento de pacotes AliExpress          |
-| Shopee Xpress   | `/shopee`         | Rastreamento de pacotes Shopee Xpress       |
-| Anjun Express   | `/anjun`          | Rastreamento de pacotes Anjun Express       |
+| Serviço | Endpoint | Observações |
+|---|---|---|
+| Correios | `/correios` | Rastreamento dos Correios do Brasil |
+| AliExpress | `/aliexpress` | Rastreamento de pacotes AliExpress |
+| Shopee Xpress | `/shopee` | Rastreamento de pacotes Shopee Xpress |
+| Anjun Express | `/anjun` | Rastreamento de pacotes Anjun Express |
+| J&T Express | `/jtexpress` | Rastreamento de pacotes J&T Express |
 
 ### Parâmetros Comuns
 
-Todos os endpoints acima aceitam os mesmos parâmetros:
+Todos os endpoints acima aceitam os mesmos parâmetros (exceto onde notado):
 
-| Parâmetro         | Tipo   | Obrigatório | Descrição                                                                                   |
-|-------------------|--------|-------------|---------------------------------------------------------------------------------------------|
-| `tracking_code`   | string | Sim         | Código de rastreamento do pacote. Aceita diversos formatos internacionais.                  |
-| `confidence_level`| string | Não         | Nível de confiança para tentativas de rastreamento em caso de falha. Valores: `low`, `medium`, `high`. Padrão: `high`. |
-| `language`        | string | Não         | Idioma da resposta. Valores: `pt-BR`, `en-US`, `fr-FR`, `zh-CN`. Padrão: `en-US`. |
+| Parâmetro | Tipo | Obrigatório | Descrição |
+|---|---|---|---|
+| `tracking_code` | string | Sim | Código de rastreamento do pacote. Aceita diversos formatos internacionais. |
+| `confidence_level`| string | Não | Nível de confiança para tentativas de rastreamento em caso de falha. Valores: `low`, `medium`, `high`. Padrão: `high`. |
+| `language` | string | Não | Idioma da resposta. Valores: `pt-BR`, `en-US`, `fr-FR`, `zh-CN`. Padrão: `en-US`. |
+| `document` | string | Sim* | Obrigatório **apenas** para J&T Express. Deve conter o CPF do destinatário (apenas números). |
 
 > **Nota:** O parâmetro `language` só é aceito para AliExpress.
 
@@ -61,7 +63,7 @@ curl -X GET "https://api.pacotevicio.dev/correios?tracking_code=AM101610575BR" \
   --header "X-RapidAPI-Key: SUA_CHAVE_DE_API"
 ```
 
-Troque `/correios` por `/aliexpress`, `/shopee` ou `/anjun` conforme o serviço desejado.
+Troque `/correios` por `/aliexpress`, `/shopee`, `/anjun` ou `/jtexpress` conforme o serviço desejado.
 
 ---
 
@@ -456,6 +458,47 @@ Troque `/correios` por `/aliexpress`, `/shopee` ou `/anjun` conforme o serviço 
     ],
     "providerNumber": null,
     "trackNo": "AJ250101341570001"
+}
+```
+</details>
+
+<details>
+<summary><strong>Exemplo de resposta - J&T Express</strong></summary>
+
+```json
+{
+    "keyword": "888030556767025",
+    "details": [
+        {
+            "scanTime": "2026-01-17 12:55:57",
+            "scanTypeName": "快件签收",
+            "customerTracking": "[Teresina] O pacote foi assinado! O signatário é [Recebimento por terc], se você tiver alguma dúvida, entre em contato com: 0800XXXXXXX, se você tiver algum problema ou reclamação, ligue para o número da filial: 0800XXXXXXX",
+            "status": "Pedido Entregue",
+            "sigPicUrl": "aza180low1825del/lite-ylappbc/SIGNING_SCAN_LIST/20260117/880495994808124166_861674_110_20260117125543742_0649.jpeg,aza180low1825del/lite-ylappbc/SIGNING_SCAN_LIST/20260117/880496046121240381_861674_110_20260117125555976_7052.jpeg",
+            "electronicSignaturePicUrl": "https://pro-jmsbr-file.jtjms-br.com/aza180low1825del/lite-ylappbc/SIGNING_SCAN_LIST/20260117/880495954601526018_861674_110_20260117125534125_0254.jpeg?sv=2023-11-03&spr=https&se=2026-01-20T08%3A57%3A48Z&sr=b&sp=r&sig=FaWbbPP%2BybdKEbFcJyZ3b26BCmYJCoUhnLoAxJ0a8lI%3D",
+            "signList": [
+                "https://pro-jmsbr-file.jtjms-br.com/aza180low1825del/lite-ylappbc/SIGNING_SCAN_LIST/20260117/880495994808124166_861674_110_20260117125543742_0649.jpeg?sv=2023-11-03&spr=https&se=2026-01-20T08%3A57%3A48Z&sr=b&sp=r&sig=SHPFfkcqXMbbVbKK4NpvUA1Kkp1yMTbMQuuyYmYmnRc%3D",
+                "https://pro-jmsbr-file.jtjms-br.com/aza180low1825del/lite-ylappbc/SIGNING_SCAN_LIST/20260117/880496046121240381_861674_110_20260117125555976_7052.jpeg?sv=2023-11-03&spr=https&se=2026-01-20T08%3A57%3A48Z&sr=b&sp=r&sig=TtdTY5G%2FNMrz%2FCgQo8%2FudrAoDSvCOgoAZAir3GWbbH4%3D"
+            ],
+            "code": 100,
+            "remark1": "Recebimento por terc",
+            "remark2": "1"
+        },
+        {
+            "scanTime": "2026-01-16 21:29:26",
+            "scanTypeName": "出仓扫描",
+            "customerTracking": "O entregador [Teresina] [THE 02-PI], M****A está enviando a encomenda. Se você tiver algum problema ou reclamação, ligue para o número da filial: 0800XXXXXXX",
+            "status": "Em Rota de Entrega",
+            "code": 94
+        },
+        {
+            "scanTime": "2026-01-12 23:01:34",
+            "scanTypeName": "快件揽收",
+            "customerTracking": "[Guarulhos] [PA PEGAKI-GRU-SP] Seu entregador L****s retirou a encomenda. Se você tiver qualquer problema ou reclamação, ligue para o número da filial: 0800XXXXXXX",
+            "status": "Coletado",
+            "code": 10
+        }
+    ]
 }
 ```
 </details>
