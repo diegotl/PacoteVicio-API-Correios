@@ -1,6 +1,6 @@
-# 📦 API PacoteVício - Rastreamento de Encomendas Correios, AliExpress, Shopee Xpress, Anjun Express e J&T Express
+# 📦 API PacoteVício - Rastreamento de Encomendas Correios, AliExpress, Shopee Xpress, Anjun Express, J&T Express e Total Express
 
-Documentação da API PacoteVício para rastreamento de objetos dos Correios do Brasil, pacotes do AliExpress, Shopee Xpress, Anjun Express e J&T Express.
+Documentação da API PacoteVício para rastreamento de objetos dos Correios do Brasil, pacotes do AliExpress, Shopee Xpress, Anjun Express, J&T Express e Total Express.
 Veja mais informações na [página oficial da API PacoteVício](http://pacotevicio.dev).
 
 ## 🔗 Acesso à API
@@ -32,6 +32,7 @@ A API suporta múltiplos serviços de rastreamento, todos com a mesma estrutura 
 | Shopee Xpress | `/shopee` | Rastreamento de pacotes Shopee Xpress |
 | Anjun Express | `/anjun` | Rastreamento de pacotes Anjun Express |
 | J&T Express | `/jtexpress` | Rastreamento de pacotes J&T Express |
+| Total Express | `/totalexpress` | Rastreamento de pacotes Total Express |
 
 ### Parâmetros Comuns
 
@@ -63,7 +64,7 @@ curl -X GET "https://api.pacotevicio.dev/correios?tracking_code=AM101610575BR" \
   --header "X-RapidAPI-Key: SUA_CHAVE_DE_API"
 ```
 
-Troque `/correios` por `/aliexpress`, `/shopee`, `/anjun` ou `/jtexpress` conforme o serviço desejado.
+Troque `/correios` por `/aliexpress`, `/shopee`, `/anjun`, `/jtexpress` ou `/totalexpress` conforme o serviço desejado.
 
 ---
 
@@ -499,6 +500,112 @@ Troque `/correios` por `/aliexpress`, `/shopee`, `/anjun` ou `/jtexpress` confor
             "code": 10
         }
     ]
+}
+```
+</details>
+
+<details>
+<summary><strong>Exemplo de resposta - Total Express</strong></summary>
+
+```json
+{
+    "data": {
+        "encomenda": {
+            "pudo": null,
+            "ultimoStatusId": 1,
+            "previsaoEntrega": "2026-03-23",
+            "pedido": "P4n4XGLH2",
+            "awb": "AMZB901884819tx",
+            "nfiscal": "3*******",
+            "cliente": {
+                "fantasia": "AMAZON RETAIL TBAV - STD - PAG - DRS5"
+            }
+        },
+        "layouts": [
+            {
+                "id": 1,
+                "nome": "Nacional",
+                "label": "nacional_padrao",
+                "ultimoStepId": 4,
+                "etapas": [
+                    {
+                        "id": 1,
+                        "nome": "Em posse da transportadora",
+                        "icone": "place",
+                        "ordemNum": 1,
+                        "listaStatus": [
+                            {
+                                "statid": 84,
+                                "statusDescricao": "COLETA REALIZADA C/ NÃO CONFORMIDADE",
+                                "data": "2026-02-27",
+                                "hora": "20:51:18"
+                            },
+                            {
+                                "statid": 101,
+                                "statusDescricao": "RECEBIDA E PROCESSADA NO CD - JDU",
+                                "data": "2026-02-27",
+                                "hora": "20:51:19"
+                            }
+                        ]
+                    },
+                    {
+                        "id": 2,
+                        "nome": "Transferência para unidade local",
+                        "icone": "local_shipping",
+                        "ordemNum": 2,
+                        "listaStatus": [
+                            {
+                                "statid": 78,
+                                "statusDescricao": "EMBARCADO PARA: BLI",
+                                "data": "2026-03-02",
+                                "hora": "04:38:35"
+                            },
+                            {
+                                "statid": 108,
+                                "statusDescricao": "DESCARREGADO - BLI",
+                                "data": "2026-03-06",
+                                "hora": "14:58:41"
+                            }
+                        ]
+                    },
+                    {
+                        "id": 3,
+                        "nome": "Saída para Entrega",
+                        "icone": "local_mall",
+                        "ordemNum": 3,
+                        "listaStatus": [
+                            {
+                                "statid": 105,
+                                "statusDescricao": "EM ROTA",
+                                "data": "2026-03-06",
+                                "hora": "14:58:41"
+                            },
+                            {
+                                "statid": 104,
+                                "statusDescricao": "PROCESSO DE ENTREGA",
+                                "data": "2026-03-13",
+                                "hora": "09:38:46"
+                            }
+                        ]
+                    },
+                    {
+                        "id": 4,
+                        "nome": "Entrega Realizada",
+                        "icone": "done",
+                        "ordemNum": 4,
+                        "listaStatus": [
+                            {
+                                "statid": 1,
+                                "statusDescricao": "ENTREGA REALIZADA",
+                                "data": "2026-03-14",
+                                "hora": "08:12:29"
+                            }
+                        ]
+                    }
+                ]
+            }
+        ]
+    }
 }
 ```
 </details>
